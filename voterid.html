@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Voter ID - Empowering Democracy</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a2d9b6f6d3.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --accent1:linear-gradient(135deg,#3b82f6 0%,#06b6d4 100%);
+      --accent2:linear-gradient(135deg,#f97316 0%,#f59e0b 100%);
+      --accent3:linear-gradient(135deg,#10b981 0%,#34d399 100%);
+      --muted:#64748b;
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,Arial,sans-serif;
+      background:linear-gradient(180deg,#eef2ff 0%, #fefce8 100%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      border-bottom:1px solid rgba(15,23,42,0.04);
+    }
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:46px;height:46px;border-radius:10px;background:var(--accent1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 6px 18px rgba(59,130,246,0.15)}
+    .brand h1{font-family:Lora,serif;margin:0;font-size:18px}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;display:inline-flex;gap:8px;align-items:center}
+    .nav-links a:hover{background:rgba(15,23,42,0.04);color:#0f172a}
+    .btn-cta{padding:8px 14px;border-radius:10px;background:var(--accent2);color:white;font-weight:600;text-decoration:none;box-shadow:0 8px 22px rgba(245,158,11,0.14)}
+
+    /* HERO */
+    .hero{padding:72px 0;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{padding:36px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.75));box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    .hero h2{font-family:Lora,serif;font-size:34px;margin:0 0 12px}
+    .hero p{margin:0 0 20px;color:var(--muted)}
+    .hero .cta{display:flex;gap:12px}
+    .cta .primary{background:var(--accent1);color:white;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:600;box-shadow:0 10px 30px rgba(6,182,212,0.12)}
+    .cta .secondary{background:transparent;border:1px solid rgba(15,23,42,0.06);padding:10px 16px;border-radius:12px;text-decoration:none;color:var(--muted)}
+
+    .stats{display:flex;gap:12px;margin-top:18px}
+    .stat{background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.6));padding:12px;border-radius:10px;min-width:110px;text-align:center}
+    .stat strong{display:block;font-size:20px}
+
+    /* FORM & CARDS */
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 8px 20px rgba(2,6,23,0.04)}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .full{grid-column:1/-1}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    input[type="text"],input[type="email"],input[type="tel"],select,textarea,input[type="date"]{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);outline:none;font-size:14px;background:linear-gradient(180deg,white, #fbfdff);
+      transition:box-shadow .18s,transform .15s;
+    }
+    input:focus,select:focus,textarea:focus{box-shadow:0 8px 20px rgba(59,130,246,0.08);transform:translateY(-2px)}
+    .radio-row{display:flex;gap:12px;align-items:center}
+
+    /* submit */
+    .submit-btn{grid-column:1/-1;display:inline-flex;align-items:center;gap:10px;justify-content:center;padding:12px 16px;border-radius:12px;border:none;color:white;font-weight:700;cursor:pointer;background:var(--accent3);transition:transform .12s,box-shadow .12s}
+    .submit-btn:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(16,185,129,0.12)}
+
+    /* File preview */
+    .photo-preview{width:110px;height:110px;border-radius:10px;background:linear-gradient(180deg,#fff,#f3f9f6);display:flex;align-items:center;justify-content:center;border:1px dashed rgba(15,23,42,0.06)}
+
+    /* status box */
+    .result-table{width:100%;border-collapse:collapse}
+    .result-table th,.result-table td{padding:10px;text-align:left}
+    .result-table tr:nth-child(odd){background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6))}
+    .result-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.8))}
+
+    /* contact */
+    .contact-wrap{display:grid;grid-template-columns:1fr 320px;gap:18px}
+
+    /* footer */
+    footer{margin-top:48px;background:#0b1220;color:#e6eef8;padding:28px 0}
+    footer .foot-inner{display:flex;justify-content:space-between;align-items:center}
+
+    /* Utilities */
+    .section{padding:40px 0}
+    .center{display:flex;align-items:center;justify-content:center}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      form{grid-template-columns:1fr}
+      .contact-wrap{grid-template-columns:1fr}
+    }
+
+    /* Animations */
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease}
+    .fade-in.show{opacity:1;transform:translateY(0)}
+
+    /* small touches */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">VID</div>
+        <div>
+          <h1>VoterID</h1>
+          <div style="font-size:12px;color:var(--muted)">Empowering Democracy</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#apply"><i class="fa-solid fa-file-circle-plus"></i> Apply</a>
+        <a href="#status"><i class="fa-solid fa-search"></i> Check Status</a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+        <a class="btn-cta" href="#apply">Apply Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section id="home" class="hero section">
+      <div class="hero-card card fade-in">
+        <h2>Empowering Democracy — Apply for Your Voter ID Today</h2>
+        <p class="muted">Registering to vote is a powerful right. Get your voter ID quickly and securely. Our simple online form helps you apply easily from any device.</p>
+
+        <div class="cta">
+          <a class="primary" href="#apply">Apply for Voter ID</a>
+          <a class="secondary" href="#status">Check Application</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="muted">Applications</div>
+            <strong id="stat-apps">0</strong>
+          </div>
+          <div class="stat">
+            <div class="muted">Approved</div>
+            <strong id="stat-approved">0</strong>
+          </div>
+          <div class="stat">
+            <div class="muted">Processing</div>
+            <strong id="stat-pending">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-in center" style="flex-direction:column;gap:12px">
+        <div style="width:100%">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9c3b2d8a4b1d0e9b7c6a" alt="voting" style="width:100%;border-radius:10px;display:block;object-fit:cover;height:220px">
+        </div>
+        <div style="text-align:center">
+          <h3 style="margin:0">Make your voice count</h3>
+          <p class="muted" style="margin:6px 0">Modern, fast and secure voter ID application</p>
+          <a class="primary" href="#apply" style="display:inline-block;margin-top:8px">Start Application</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLY -->
+    <section id="apply" class="section fade-in">
+      <h2 style="margin-bottom:12px">Apply for Voter ID</h2>
+      <p class="muted" style="margin-top:0;margin-bottom:18px">Fill the form below with accurate details. After submission you'll receive an application number to check status.</p>
+
+      <div class="card">
+        <form id="applyForm">
+          <div>
+            <label>Full Name</label>
+            <input type="text" id="name" required placeholder="Your full name">
+          </div>
+
+          <div>
+            <label>Date of Birth</label>
+            <input type="date" id="dob" required>
+          </div>
+
+          <div class="full">
+            <label>Gender</label>
+            <div class="radio-row">
+              <label><input type="radio" name="gender" value="Male" checked> Male</label>
+              <label><input type="radio" name="gender" value="Female"> Female</label>
+              <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+          </div>
+
+          <div class="full">
+            <label>Address</label>
+            <textarea id="address" rows="3" placeholder="Street, area, postal code" required></textarea>
+          </div>
+
+          <div>
+            <label>State</label>
+            <select id="state" required>
+              <option value="">Select State</option>
+              <option>Maharashtra</option>
+              <option>Gujarat</option>
+              <option>Rajasthan</option>
+              <option>Karnataka</option>
+              <option>Delhi</option>
+            </select>
+          </div>
+
+          <div>
+            <label>City</label>
+            <input type="text" id="city" required placeholder="City">
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input type="email" id="email" required placeholder="you@example.com">
+          </div>
+
+          <div>
+            <label>Mobile Number</label>
+            <input type="tel" id="mobile" required placeholder="10 digit mobile" maxlength="10">
+          </div>
+
+          <div>
+            <label>Upload Photo</label>
+            <input type="file" id="photo" accept="image/*">
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="photo-preview" id="photoPreview">No Photo</div>
+            <div class="muted">Tip: Use a clear passport-sized photo (JPG/PNG).</div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Application <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+
+        <div id="applyResult" style="display:none;margin-top:14px" class="card result-card"></div>
+      </div>
+    </section>
+
+    <!-- STATUS -->
+    <section id="status" class="section fade-in">
+      <h2>Check Application Status</h2>
+      <p class="muted">Enter your application number to see the current status.</p>
+
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:center">
+          <input type="text" id="appSearch" placeholder="Enter Application Number (e.g. VID-1691234)" style="flex:1;padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06)">
+          <button id="searchBtn" class="submit-btn" style="padding:10px 14px">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div id="statusResult" style="margin-top:14px;display:none" class="card result-card"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section fade-in">
+      <h2>Contact Us</h2>
+      <p class="muted">Questions or help? Send us a message and we'll reply quickly.</p>
+
+      <div class="card contact-wrap">
+        <form id="contactForm">
+          <label class="full">Name</label>
+          <input type="text" id="cname" required>
+
+          <label class="full">Email</label>
+          <input type="email" id="cemail" required>
+
+          <label class="full">Message</label>
+          <textarea id="cmessage" rows="4" required></textarea>
+
+          <button type="submit" class="submit-btn full">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+
+        <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#0ea5a7,#3b82f6);color:white;display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:center">
+          <h3 style="margin:0">Need Help?</h3>
+          <p style="margin:0;font-size:14px">Call us: +91 98765 43210<br> Email: help@voterid.example</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container foot-inner">
+        <div>© <strong>VoterID</strong> — Empowering Democracy</div>
+        <div class="muted">Built with ❤️ • Responsive • Secure frontend demo</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // small helper
+    const q = s => document.querySelector(s);
+    const qs = s => document.querySelectorAll(s);
+
+    // animate on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting) en.target.classList.add('show');
+      })
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+    // Stats from localStorage
+    function updateStats(){
+      const apps = JSON.parse(localStorage.getItem('vid_apps')||'[]');
+      const approved = apps.filter(a=>a.status==='Approved').length;
+      const pending = apps.filter(a=>a.status==='Pending').length;
+      q('#stat-apps').textContent = apps.length;
+      q('#stat-approved').textContent = approved;
+      q('#stat-pending').textContent = pending;
+    }
+    updateStats();
+
+    // Photo preview
+    q('#photo').addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      const prev = q('#photoPreview');
+      if(!file){ prev.textContent='No Photo'; return; }
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        prev.innerHTML = `<img src="${reader.result}" alt="photo" style="width:100%;height:100%;object-fit:cover;border-radius:8px">`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Apply form handling -> store in localStorage
+    q('#applyForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      // validation
+      const name = q('#name').value.trim();
+      const dob = q('#dob').value;
+      const gender = document.querySelector('input[name=gender]:checked').value;
+      const address = q('#address').value.trim();
+      const state = q('#state').value;
+      const city = q('#city').value.trim();
+      const email = q('#email').value.trim();
+      const mobile = q('#mobile').value.trim();
+
+      if(!name || !dob || !address || !state || !city || !email || !mobile){
+        alert('Please fill all required fields'); return;
+      }
+      if(!/^[0-9]{10}$/.test(mobile)){
+        alert('Mobile number must be 10 digits'); return;
+      }
+      if(!/^\S+@\S+\.\S+$/.test(email)){
+        alert('Please enter a valid email'); return;
+      }
+
+      // create application object
+      const apps = JSON.parse(localStorage.getItem('vid_apps')||'[]');
+      const appNo = 'VID-' + Date.now().toString().slice(-7);
+
+      // try to get photo dataURL
+      const photoInput = q('#photo');
+      if(photoInput.files && photoInput.files[0]){
+        const reader = new FileReader();
+        reader.onload = ()=>{
+          const photoData = reader.result;
+          const app = {appNo,name,dob,gender,address,state,city,email,mobile,photo:photoData,status:'Pending',submitted: new Date().toISOString()};
+          apps.push(app);
+          localStorage.setItem('vid_apps', JSON.stringify(apps));
+          showApplyResult(app);
+          updateStats();
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      } else {
+        const app = {appNo,name,dob,gender,address,state,city,email,mobile,photo:null,status:'Pending',submitted: new Date().toISOString()};
+        apps.push(app);
+        localStorage.setItem('vid_apps', JSON.stringify(apps));
+        showApplyResult(app);
+        updateStats();
+      }
+
+    });
+
+    function showApplyResult(app){
+      const box = q('#applyResult');
+      box.style.display='block';
+      box.innerHTML = `\n        <h3 style=\"margin:0 0 8px\">Application Submitted</h3>\n        <p class=\"muted\">Your application number is <strong>${app.appNo}</strong>. Save this number to check status later.</p>\n        <div style=\"display:flex;gap:12px;margin-top:12px;align-items:center\">\n          <div style=\"width:100px;height:100px;border-radius:8px;overflow:hidden;background:#f7fafc;border:1px solid rgba(15,23,42,0.04)\">${app.photo?`<img src=\"${app.photo}\" style=\"width:100%;height:100%;object-fit:cover\"/>`:'<div style=\"padding:14px;color:var(--muted)\">No Photo</div>'}</div>\n          <div>\n            <div><strong>Name:</strong> ${app.name}</div>\n            <div><strong>Submitted:</strong> ${new Date(app.submitted).toLocaleString()}</div>\n            <div style=\"margin-top:8px\"><a href=\"#status\">Check Status</a></div>\n          </div>\n        </div>\n      `;
+    }
+
+    // Search status
+    q('#searchBtn').addEventListener('click', ()=>{
+      const id = q('#appSearch').value.trim();
+      searchApp(id);
+    });
+    q('#appSearch').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); searchApp(q('#appSearch').value.trim()); } });
+
+    function searchApp(id){
+      const list = JSON.parse(localStorage.getItem('vid_apps')||'[]');
+      const box = q('#statusResult');
+      box.style.display='none';
+      if(!id){ alert('Please enter an application number'); return; }
+      const found = list.find(x=>x.appNo===id);
+      if(!found){
+        box.style.display='block';
+        box.innerHTML = `<div><strong>No record found for</strong> ${id}</div>`;
+        return;
+      }
+      box.style.display='block';
+      box.innerHTML = `
+        <h3 style="margin:0 0 8px">Application Details</h3>
+        <table class="result-table">
+          <tr><th>Application No</th><td>${found.appNo}</td></tr>
+          <tr><th>Name</th><td>${found.name}</td></tr>
+          <tr><th>Submitted</th><td>${new Date(found.submitted).toLocaleString()}</td></tr>
+          <tr><th>Status</th><td>${found.status}</td></tr>
+          <tr><th>State, City</th><td>${found.state}, ${found.city}</td></tr>
+          <tr><th>Contact</th><td>${found.email} • ${found.mobile}</td></tr>
+        </table>
+      `;
+    }
+
+    // Contact form
+    q('#contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = q('#cname').value.trim();
+      const email = q('#cemail').value.trim();
+      const msg = q('#cmessage').value.trim();
+      if(!name||!email||!msg){ alert('Please fill all fields'); return; }
+      alert('Message sent. Thank you!');
+      q('#contactForm').reset();
+    });
+
+    // initial demo data (only if empty) - to showcase stats
+    (function seedDemo(){
+      const key='vid_apps';
+      if(!localStorage.getItem(key)){
+        const demo = [
+          {appNo:'VID-1000001',name:'Asha Patel',status:'Approved',submitted:new Date().toISOString(),state:'Maharashtra',city:'Mumbai',email:'asha@example.com',mobile:'9876500011'},
+          {appNo:'VID-1000002',name:'Vikram Rao',status:'Pending',submitted:new Date().toISOString(),state:'Karnataka',city:'Bangalore',email:'vikram@example.com',mobile:'9876500022'}
+        ];
+        localStorage.setItem(key,JSON.stringify(demo));
+        updateStats();
+      }
+    })();
+
+  </script>
+</body>
+</html>
